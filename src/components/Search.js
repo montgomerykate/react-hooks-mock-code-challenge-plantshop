@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Search() {
+function Search({ onSearch, handleSubmit }) {
+  const [currentSearch, setCurrentSearch] = useState("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSearch(currentSearch);
+  }
   return (
-    <div className="searchbar">
-      <label htmlFor="search">Search Plants:</label>
+    <div className="ui large fluid icon input" onSubmit={handleSubmit}>
       <input
         type="text"
-        id="search"
-        placeholder="Type a name to search..."
-        onChange={(e) => console.log("Searching...")}
+        placeholder="Search your Recent Transactions"
+        value = {currentSearch}
+        onChange={(e) => setCurrentSearch(e.target.value)}
       />
+      <i className="circular search link icon"></i>
     </div>
   );
 }
